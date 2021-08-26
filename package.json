@@ -1,0 +1,23 @@
+{
+  "name": "cafsp-widgets",
+  "version": "1.0.0",
+  "description": "WordPress plugin for CAFSP; creates several custom extensions for Elementor Pro",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/galyonj/cafsp-widgets.git"
+  },
+  "author": "John Galyon <galyon.jb@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/galyonj/cafsp-widgets/issues"
+  },
+  "homepage": "https://github.com/galyonj/cafsp-widgets#readme",
+  "devDependencies": {
+    "@wordpress/eslint-plugin": "^9.1.1",
+    "eslint": "^7.32.0"
+  }
+}

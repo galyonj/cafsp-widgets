@@ -1,0 +1,51 @@
+version: "3.3"
+
+services:
+  db:
+    container_name: "db"
+    image: "mariadb:latest"
+    volumes:
+      - "./db:/var/lib/mysql"
+    ports:
+      - "18766:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: wordpress_password
+
+  phpmyadmin:
+    container_name: "phpmyadmin"
+    image: "phpmyadmin/phpmyadmin"
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+
+  wp:
+    container_name: "wp"
+    image: "wpdiaries/wordpress-xdebug:latest"
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    expose:
+      - "9003"
+    environment:
+      WORDPRESS_DB_HOST: "db:3306"
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress_db
+      WORDPRESS_DEBUG: 1
+      # Set the XDEBUG_CONFIG as described here: https://xdebug.org/docs/remote
+      XDEBUG_CONFIG: remote_host=192.168.50.188
+    volumes:
+      - "./wp:/var/www/html"
+      - "./plugins:/var/www/html/wp-content/plugins"
+      - "./themes:/var/www/html/wp-content/themes"
+
+volumes:
+  db: {}
+  wp: {}
